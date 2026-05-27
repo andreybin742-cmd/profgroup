@@ -5,11 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Профгруппа Дирекции связи | Роспрофжел</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -19,12 +15,8 @@
             color: #2c1810;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        .container { max-width: 1200px; margin: 0 auto; }
 
-        /* Шапка */
         .header {
             background: linear-gradient(135deg, #8b1e1e, #b33a3a);
             border-radius: 30px;
@@ -38,12 +30,7 @@
             gap: 15px;
             box-shadow: 0 5px 20px rgba(139,30,30,0.2);
         }
-        .header h1 {
-            font-size: 26px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+        .header h1 { font-size: 26px; display: flex; align-items: center; gap: 12px; }
         .login-btn {
             background: rgba(255,255,255,0.2);
             border: 2px solid rgba(255,255,255,0.5);
@@ -54,9 +41,7 @@
             cursor: pointer;
             transition: all 0.2s;
         }
-        .login-btn:hover {
-            background: rgba(255,255,255,0.3);
-        }
+        .login-btn:hover { background: rgba(255,255,255,0.3); }
         .user-info {
             background: rgba(255,255,255,0.15);
             padding: 6px 18px;
@@ -75,7 +60,6 @@
             cursor: pointer;
         }
 
-        /* Навигация */
         .nav-tabs {
             display: flex;
             flex-wrap: wrap;
@@ -97,17 +81,9 @@
             cursor: pointer;
             transition: all 0.2s;
         }
-        .nav-tab:hover {
-            background: rgba(139,30,30,0.1);
-            color: #8b1e1e;
-        }
-        .nav-tab.active {
-            background: #8b1e1e;
-            color: white;
-            box-shadow: 0 3px 10px rgba(139,30,30,0.3);
-        }
+        .nav-tab:hover { background: rgba(139,30,30,0.1); color: #8b1e1e; }
+        .nav-tab.active { background: #8b1e1e; color: white; box-shadow: 0 3px 10px rgba(139,30,30,0.3); }
 
-        /* Карточки */
         .card {
             background: white;
             border-radius: 20px;
@@ -137,15 +113,9 @@
             transition: transform 0.2s;
             color: #d4a017;
         }
-        .collapse-icon.collapsed {
-            transform: rotate(-90deg);
-        }
-        .card-content {
-            margin-top: 15px;
-        }
-        .card-content.collapsed {
-            display: none;
-        }
+        .collapse-icon.collapsed { transform: rotate(-90deg); }
+        .card-content { margin-top: 15px; }
+        .card-content.collapsed { display: none; }
 
         .admin-panel {
             background: #fef0cc;
@@ -169,9 +139,7 @@
             font-weight: 600;
             transition: all 0.2s;
         }
-        .admin-btn:hover {
-            background: #b33a3a;
-        }
+        .admin-btn:hover { background: #b33a3a; }
 
         .events-grid {
             display: grid;
@@ -185,43 +153,14 @@
             border-left: 4px solid #8b1e1e;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
-        .event-date {
-            color: #8b1e1e;
-            font-weight: bold;
-            font-size: 12px;
-        }
-        .event-title {
-            font-size: 17px;
-            font-weight: bold;
-            margin: 10px 0 8px;
-            color: #8b1e1e;
-        }
+        .event-date { color: #8b1e1e; font-weight: bold; font-size: 12px; }
+        .event-title { font-size: 17px; font-weight: bold; margin: 10px 0 8px; color: #8b1e1e; }
 
-        .table-wrapper {
-            overflow-x: auto;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 14px;
-        }
-        th, td {
-            padding: 10px 12px;
-            text-align: left;
-            border-bottom: 1px solid #f0d8cc;
-        }
-        th {
-            background: #fef0cc;
-            color: #2c1810;
-            font-weight: 600;
-        }
-        .action-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            padding: 4px 6px;
-        }
+        .table-wrapper { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #f0d8cc; }
+        th { background: #fef0cc; color: #2c1810; font-weight: 600; }
+        .action-btn { background: none; border: none; cursor: pointer; font-size: 16px; padding: 4px 6px; }
         .edit-btn { color: #1565c0; }
         .delete-btn { color: #c62828; }
 
@@ -233,9 +172,7 @@
             cursor: pointer;
             transition: all 0.2s;
         }
-        .poll-option:hover {
-            background: #ffe0b0;
-        }
+        .poll-option:hover { background: #ffe0b0; }
         .poll-result-bar {
             height: 24px;
             background: #8b1e1e;
@@ -321,11 +258,7 @@
             border-radius: 12px;
             font-size: 14px;
         }
-        .radio-group {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
+        .radio-group { display: flex; gap: 20px; align-items: center; }
 
         .badge {
             background: #fef0cc;
@@ -336,19 +269,11 @@
 
         .page { display: none; }
         .page.active { display: block; }
+        .admin-only { display: none; }
+        .group-only { display: none; }
 
-        .empty-message {
-            text-align: center;
-            padding: 40px;
-            color: #999;
-        }
-
-        footer {
-            text-align: center;
-            padding: 30px;
-            color: #999;
-            font-size: 11px;
-        }
+        .empty-message { text-align: center; padding: 40px; color: #999; }
+        footer { text-align: center; padding: 30px; color: #999; font-size: 11px; }
     </style>
 </head>
 <body>
@@ -357,7 +282,7 @@
     <div class="header">
         <h1>🚂 Профгруппа Дирекции связи</h1>
         <div id="authSection">
-            <button class="login-btn" onclick="showLoginModal()">🔐 Вход для профгруппы</button>
+            <button class="login-btn" id="showLoginBtn">🔐 Вход для профгруппы</button>
         </div>
     </div>
 
@@ -365,26 +290,14 @@
         <button class="nav-tab active" data-page="news">📰 Новости</button>
         <button class="nav-tab" data-page="events">🎉 Мероприятия</button>
         <button class="nav-tab" data-page="vouchers">🏖️ Путевки</button>
-        <button class="nav-tab admin-only" data-page="admin" style="display:none;">⚙️ Управление</button>
-        <button class="nav-tab group-only" data-page="group" style="display:none;">👥 Группа</button>
+        <button class="nav-tab admin-only" id="adminTab" data-page="admin" style="display:none;">⚙️ Управление</button>
+        <button class="nav-tab group-only" id="groupTab" data-page="group" style="display:none;">👥 Группа</button>
     </div>
 
-    <!-- НОВОСТИ (видят все) -->
-    <div id="newsPage" class="page active">
-        <div id="newsList" class="events-grid"></div>
-    </div>
+    <div id="newsPage" class="page active"><div id="newsList" class="events-grid"></div></div>
+    <div id="eventsPage" class="page"><div id="eventsList" class="events-grid"></div></div>
+    <div id="vouchersPage" class="page"><div id="vouchersList" class="events-grid"></div></div>
 
-    <!-- МЕРОПРИЯТИЯ (видят все) -->
-    <div id="eventsPage" class="page">
-        <div id="eventsList" class="events-grid"></div>
-    </div>
-
-    <!-- ПУТЕВКИ (видят все) -->
-    <div id="vouchersPage" class="page">
-        <div id="vouchersList" class="events-grid"></div>
-    </div>
-
-    <!-- АДМИН-ПАНЕЛЬ (только для админа) -->
     <div id="adminPage" class="page">
         <div class="card">
             <div class="card-header" onclick="toggleCollapse('pollsCard')">
@@ -393,10 +306,9 @@
             </div>
             <div id="pollsCardContent" class="card-content">
                 <div id="pollsList"></div>
-                <button class="admin-btn" onclick="openPollModal()" style="margin-top: 10px;">+ Создать голосование</button>
+                <button class="admin-btn" onclick="openPollModal()" style="margin-top:10px;">+ Создать голосование</button>
             </div>
         </div>
-
         <div class="card">
             <div class="card-header" onclick="toggleCollapse('expensesCard')">
                 <div class="card-title">💰 Расходы профгруппы</div>
@@ -404,10 +316,9 @@
             </div>
             <div id="expensesCardContent" class="card-content">
                 <div class="table-wrapper"><table id="expensesTable"><thead><tr><th>Дата</th><th>Статья</th><th>Сумма</th><th>Комментарий</th><th></th></tr></thead><tbody></tbody></table></div>
-                <button class="admin-btn" onclick="openExpenseModal()" style="margin-top: 10px;">+ Добавить расход</button>
+                <button class="admin-btn" onclick="openExpenseModal()" style="margin-top:10px;">+ Добавить расход</button>
             </div>
         </div>
-
         <div class="card">
             <div class="card-header" onclick="toggleCollapse('jubileeCard')">
                 <div class="card-title">🎂 Юбиляры</div>
@@ -415,10 +326,9 @@
             </div>
             <div id="jubileeCardContent" class="card-content">
                 <div class="table-wrapper"><table id="jubileeTable"><thead><tr><th>ФИО</th><th>Дата рождения</th><th>Дата юбилея</th><th>Поздравление</th><th>Статус</th><th></th></tr></thead><tbody></tbody></table></div>
-                <button class="admin-btn" onclick="openJubileeModal()" style="margin-top: 10px;">+ Добавить юбиляра</button>
+                <button class="admin-btn" onclick="openJubileeModal()" style="margin-top:10px;">+ Добавить юбиляра</button>
             </div>
         </div>
-
         <div class="card">
             <div class="card-header" onclick="toggleCollapse('rewardsCard')">
                 <div class="card-title">🏆 Поощрения сотрудников</div>
@@ -438,7 +348,6 @@
         </div>
     </div>
 
-    <!-- СТРАНИЦА ГРУППЫ (только после входа) -->
     <div id="groupPage" class="page">
         <div class="card">
             <div class="card-title">👥 Члены профгруппы (онлайн)</div>
@@ -460,10 +369,10 @@
 
 <div id="loginModal" class="modal">
     <div class="modal-content">
-        <div class="modal-header"><h3>🔐 Вход в профгруппу</h3><button class="close-modal" onclick="closeLoginModal()">&times;</button></div>
+        <div class="modal-header"><h3>🔐 Вход в профгруппу</h3><button class="close-modal" onclick="closeModalById('loginModal')">&times;</button></div>
         <div class="form-group"><label>Логин</label><input type="text" id="loginUser" placeholder="Логин"></div>
         <div class="form-group"><label>Пароль</label><input type="password" id="loginPass" placeholder="Пароль"></div>
-        <button class="admin-btn" style="width:100%" onclick="doLogin()">Войти</button>
+        <button class="admin-btn" style="width:100%" id="doLoginBtn">Войти</button>
     </div>
 </div>
 
@@ -504,59 +413,91 @@
     loadEvents();
     loadVouchers();
 
+    // Обновление онлайн-статуса
     setInterval(() => {
         if (currentUser) {
             db.collection('online').doc(currentUser).set({ lastSeen: Date.now(), user: currentUser });
         }
     }, 30000);
 
-    function showLoginModal() { document.getElementById('loginModal').style.display = 'flex'; }
-    function closeLoginModal() { document.getElementById('loginModal').style.display = 'none'; }
+    // ========== ВХОД ==========
+    document.getElementById('showLoginBtn').onclick = () => {
+        document.getElementById('loginModal').style.display = 'flex';
+    };
 
-    async function doLogin() {
+    document.getElementById('doLoginBtn').onclick = async () => {
         const login = document.getElementById('loginUser').value.trim();
         const pass = document.getElementById('loginPass').value.trim();
+        
+        console.log('Попытка входа:', login, pass);
         
         if (USERS[login] && USERS[login] === pass) {
             currentUser = login;
             isAdmin = (login === ADMIN);
             
+            console.log('Успешный вход!', currentUser, isAdmin);
+            
+            // Сохраняем онлайн
             await db.collection('online').doc(currentUser).set({ lastSeen: Date.now(), user: currentUser });
             
-            document.getElementById('authSection').innerHTML = `<div class="user-info">👤 ${currentUser} ${isAdmin ? '(Админ)' : ''}<button class="logout-btn" onclick="logout()">Выйти</button></div>`;
+            // Меняем интерфейс
+            document.getElementById('authSection').innerHTML = `
+                <div class="user-info">
+                    👤 ${currentUser} ${isAdmin ? '(Админ)' : ''}
+                    <button class="logout-btn" onclick="logout()">Выйти</button>
+                </div>
+            `;
             
-            document.querySelectorAll('.group-only').forEach(el => el.style.display = 'block');
+            // Показываем вкладки
             if (isAdmin) {
                 document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'block');
+                document.getElementById('adminTab').style.display = 'block';
                 loadPolls();
                 loadExpenses();
                 loadJubilees();
                 loadRewards();
             }
-            document.querySelector('.nav-tab[data-page="group"]').style.display = 'block';
+            document.querySelectorAll('.group-only').forEach(el => el.style.display = 'block');
+            document.getElementById('groupTab').style.display = 'block';
             
+            // Загружаем данные для группы
             loadGroupList();
             loadGroupPolls();
             
-            closeLoginModal();
+            // Закрываем модалку и переключаем на вкладку Группа
+            closeModalById('loginModal');
             document.querySelector('.nav-tab[data-page="group"]').click();
             alert('Добро пожаловать, ' + currentUser);
         } else {
+            console.log('Ошибка: неверный логин или пароль');
             alert('Неверный логин или пароль');
         }
-    }
+    };
 
     async function logout() {
-        if (currentUser) await db.collection('online').doc(currentUser).delete();
+        if (currentUser) {
+            await db.collection('online').doc(currentUser).delete();
+        }
         currentUser = null;
         isAdmin = false;
-        document.getElementById('authSection').innerHTML = `<button class="login-btn" onclick="showLoginModal()">🔐 Вход для профгруппы</button>`;
+        document.getElementById('authSection').innerHTML = '<button class="login-btn" id="showLoginBtn">🔐 Вход для профгруппы</button>';
         document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'none');
         document.querySelectorAll('.group-only').forEach(el => el.style.display = 'none');
-        document.querySelector('.nav-tab[data-page="admin"]').style.display = 'none';
-        document.querySelector('.nav-tab[data-page="group"]').style.display = 'none';
+        document.getElementById('adminTab').style.display = 'none';
+        document.getElementById('groupTab').style.display = 'none';
         document.querySelector('.nav-tab[data-page="news"]').click();
+        
+        // Перепривязываем кнопку
+        document.getElementById('showLoginBtn').onclick = () => {
+            document.getElementById('loginModal').style.display = 'flex';
+        };
         alert('Вы вышли из системы');
+    }
+
+    function closeModalById(id) {
+        document.getElementById(id).style.display = 'none';
+        document.getElementById('loginUser').value = '';
+        document.getElementById('loginPass').value = '';
     }
 
     function toggleCollapse(cardId) {
@@ -568,7 +509,7 @@
         }
     }
 
-    // Публичные данные
+    // ========== ПУБЛИЧНЫЕ ДАННЫЕ ==========
     async function loadNews() {
         const snapshot = await db.collection('news').orderBy('timestamp', 'desc').get();
         const container = document.getElementById('newsList');
@@ -602,7 +543,7 @@
         });
     }
 
-    // Данные для залогиненных
+    // ========== ДАННЫЕ ДЛЯ ГРУППЫ ==========
     async function loadGroupList() {
         const onlineSnapshot = await db.collection('online').get();
         const onlineUsers = {};
@@ -662,7 +603,7 @@
         loadGroupList();
     }
 
-    // Админ-функции
+    // ========== АДМИН-ФУНКЦИИ ==========
     async function loadPolls() {
         const snapshot = await db.collection('polls').orderBy('timestamp', 'desc').get();
         const container = document.getElementById('pollsList');
@@ -716,7 +657,7 @@
         });
     }
 
-    // Модальные окна для админа
+    // ========== МОДАЛЬНЫЕ ОКНА ДЛЯ АДМИНА ==========
     let currentEditId = null;
 
     function openPollModal() {
@@ -875,10 +816,7 @@
         });
     });
 
-    window.showLoginModal = showLoginModal;
-    window.closeLoginModal = closeLoginModal;
-    window.doLogin = doLogin;
-    window.logout = logout;
+    window.closeModalById = closeModalById;
     window.toggleCollapse = toggleCollapse;
     window.openPollModal = openPollModal;
     window.savePoll = savePoll;
@@ -895,6 +833,7 @@
     window.vote = vote;
     window.closeModal = closeModal;
     window.closeModalOnClick = closeModalOnClick;
+    window.logout = logout;
 </script>
 </body>
 </html>
