@@ -159,32 +159,6 @@
             display: none;
         }
 
-        .admin-panel {
-            background: var(--secondary-light);
-            border-radius: 20px;
-            padding: 16px;
-            margin-bottom: 20px;
-            border-left: 4px solid var(--primary);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-        .admin-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.2s;
-        }
-        .admin-btn:hover {
-            background: var(--primary-light);
-        }
-
         .events-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -248,20 +222,12 @@
         .poll-option:hover {
             background: #ffd4b0;
         }
-        .poll-option.selected {
-            background: #ffd4b0;
-            border-left: 4px solid var(--primary);
-        }
         .poll-result-bar {
             height: 24px;
             background: var(--primary);
             border-radius: 12px;
             margin: 6px 0;
             transition: width 0.4s ease;
-        }
-        .poll-voted {
-            cursor: default;
-            opacity: 0.8;
         }
         .vote-info {
             font-size: 12px;
@@ -354,13 +320,6 @@
             gap: 20px;
             align-items: center;
         }
-        .radio-group label {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: normal;
-            cursor: pointer;
-        }
 
         .badge {
             background: var(--secondary-light);
@@ -391,7 +350,7 @@
 
 <div class="container">
     <div class="header">
-        <h1>🚂 Профгруппа Дирекции связи</h1>
+        <h1>🚂 Профсоюз Новосибирской Дирекции связи</h1>
         <div id="authSection">
             <button class="login-btn" onclick="showLoginModal()">🔐 Вход для профгруппы</button>
         </div>
@@ -405,7 +364,6 @@
         <button class="nav-tab group-only" data-page="group" style="display:none;">👥 Группа</button>
     </div>
 
-    <!-- НОВОСТИ (видят все) -->
     <div id="newsPage" class="page active">
         <div class="admin-panel admin-only" style="display:none;">
             <span>📝 Управление новостями</span>
@@ -414,7 +372,6 @@
         <div id="newsList" class="events-grid"></div>
     </div>
 
-    <!-- МЕРОПРИЯТИЯ (видят все) -->
     <div id="eventsPage" class="page">
         <div class="admin-panel admin-only" style="display:none;">
             <span>🎉 Управление мероприятиями</span>
@@ -423,7 +380,6 @@
         <div id="eventsList" class="events-grid"></div>
     </div>
 
-    <!-- ПУТЕВКИ (видят все) -->
     <div id="vouchersPage" class="page">
         <div class="admin-panel admin-only" style="display:none;">
             <span>🏖️ Управление путевками</span>
@@ -432,9 +388,7 @@
         <div id="vouchersList" class="events-grid"></div>
     </div>
 
-    <!-- АДМИН-ПАНЕЛЬ (только профгруппорг) -->
     <div id="adminPage" class="page">
-        <!-- Голосования -->
         <div class="card">
             <div class="card-header" onclick="toggleCollapse('pollsCard')">
                 <div class="card-title">🗳️ Голосования</div>
@@ -446,7 +400,6 @@
             </div>
         </div>
 
-        <!-- Расходы -->
         <div class="card">
             <div class="card-header" onclick="toggleCollapse('expensesCard')">
                 <div class="card-title">💰 Расходы профгруппы</div>
@@ -458,7 +411,6 @@
             </div>
         </div>
 
-        <!-- Юбиляры -->
         <div class="card">
             <div class="card-header" onclick="toggleCollapse('jubileeCard')">
                 <div class="card-title">🎂 Юбиляры</div>
@@ -470,7 +422,6 @@
             </div>
         </div>
 
-        <!-- Поощрения -->
         <div class="card">
             <div class="card-header" onclick="toggleCollapse('rewardsCard')">
                 <div class="card-title">🏆 Поощрения сотрудников</div>
@@ -490,7 +441,6 @@
         </div>
     </div>
 
-    <!-- СТРАНИЦА ГРУППЫ (только после входа) -->
     <div id="groupPage" class="page">
         <div class="card">
             <div class="card-title">👥 Члены профгруппы (онлайн)</div>
@@ -510,7 +460,6 @@
     <footer>© 2025 Профгруппа Дирекции связи | Роспрофжел</footer>
 </div>
 
-<!-- Модальное окно входа -->
 <div id="loginModal" class="modal">
     <div class="modal-content">
         <div class="modal-header"><h3>🔐 Вход в профгруппу</h3><button class="close-modal" onclick="closeLoginModal()">&times;</button></div>
@@ -520,7 +469,6 @@
     </div>
 </div>
 
-<!-- Модальное окно для форм -->
 <div id="modal" class="modal" onclick="closeModalOnClick(event)">
     <div class="modal-content">
         <div class="modal-header"><h3 id="modalTitle">Добавить</h3><button class="close-modal" onclick="closeModal()">&times;</button></div>
@@ -534,18 +482,17 @@
 <script>
     const firebaseConfig = {
         apiKey: "AIzaSyC68WrjVaCkf5kEGfoGkw1tx-ECsc42D1c",
-  authDomain: "my-new-projekt2.firebaseapp.com",
-  projectId: "my-new-projekt2",
-  storageBucket: "my-new-projekt2.firebasestorage.app",
-  messagingSenderId: "630983568534",
-  appId: "1:630983568534:web:99d4a8a93126b9ab04e6b7",
-  measurementId: "G-CL7NJR1RNW"
-};
+        authDomain: "my-new-projekt2.firebaseapp.com",
+        projectId: "my-new-projekt2",
+        storageBucket: "my-new-projekt2.firebasestorage.app",
+        messagingSenderId: "630983568534",
+        appId: "1:630983568534:web:99d4a8a93126b9ab04e6b7"
+    };
 
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    // Учётные данные
+    // Учётные данные (логин: пароль)
     const users = {
         'НСЭ': '66',
         'ЦТУ': '10',
@@ -563,7 +510,8 @@
 
     // Загружаем публичные данные сразу (без входа)
     loadPublicData();
-    // Запускаем обновление онлайн-статуса только для залогиненных
+    
+    // Запускаем обновление онлайн-статуса для залогиненных
     setInterval(async () => {
         if (currentUser) {
             await db.collection('profGroupOnline').doc(currentUser).set({ lastSeen: Date.now(), user: currentUser });
@@ -574,9 +522,10 @@
     function closeLoginModal() { document.getElementById('loginModal').style.display = 'none'; }
 
     async function doLogin() {
-        const login = document.getElementById('loginUser').value;
-        const pass = document.getElementById('loginPass').value;
+        const login = document.getElementById('loginUser').value.trim();
+        const pass = document.getElementById('loginPass').value.trim();
         
+        // Проверка логина и пароля
         if (users[login] && users[login] === pass) {
             isAdmin = (login === adminLogin);
             currentUser = login;
@@ -628,7 +577,7 @@
         }
     }
 
-    // Публичные данные (видят все без входа)
+    // Публичные данные
     async function loadPublicData() {
         loadNews();
         loadEvents();
@@ -636,36 +585,42 @@
     }
 
     async function loadNews() {
-        const snapshot = await db.collection('profNews').orderBy('timestamp', 'desc').get();
-        const container = document.getElementById('newsList');
-        if (snapshot.empty) { container.innerHTML = '<div class="empty-message">📭 Новостей пока нет</div>'; return; }
-        container.innerHTML = '';
-        snapshot.forEach(doc => {
-            const data = doc.data();
-            container.innerHTML += `<div class="event-card"><div class="event-date">📅 ${new Date(data.timestamp).toLocaleDateString()}</div><div class="event-title">${escapeHtml(data.title)}</div><div>${escapeHtml(data.description)}</div>${isAdmin ? `<div style="margin-top:12px"><button class="edit-btn action-btn" onclick="editNews('${doc.id}','${escapeHtml(data.title)}','${escapeHtml(data.description)}')">✏️</button><button class="delete-btn action-btn" onclick="deleteNews('${doc.id}')">🗑️</button></div>` : ''}</div>`;
-        });
+        try {
+            const snapshot = await db.collection('profNews').orderBy('timestamp', 'desc').get();
+            const container = document.getElementById('newsList');
+            if (snapshot.empty) { container.innerHTML = '<div class="empty-message">📭 Новостей пока нет</div>'; return; }
+            container.innerHTML = '';
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                container.innerHTML += `<div class="event-card"><div class="event-date">📅 ${new Date(data.timestamp).toLocaleDateString()}</div><div class="event-title">${escapeHtml(data.title)}</div><div>${escapeHtml(data.description)}</div></div>`;
+            });
+        } catch(e) { console.error('Ошибка загрузки новостей:', e); }
     }
 
     async function loadEvents() {
-        const snapshot = await db.collection('profEvents').orderBy('eventDate', 'asc').get();
-        const container = document.getElementById('eventsList');
-        if (snapshot.empty) { container.innerHTML = '<div class="empty-message">🎉 Мероприятий пока нет</div>'; return; }
-        container.innerHTML = '';
-        snapshot.forEach(doc => {
-            const data = doc.data();
-            container.innerHTML += `<div class="event-card"><div class="event-date">📅 ${data.eventDate}</div><div class="event-title">${escapeHtml(data.title)}</div><div>📍 ${escapeHtml(data.place)}</div><div>${escapeHtml(data.description)}</div>${isAdmin ? `<div style="margin-top:12px"><button class="edit-btn action-btn" onclick="editEvent('${doc.id}')">✏️</button><button class="delete-btn action-btn" onclick="deleteEvent('${doc.id}')">🗑️</button></div>` : ''}</div>`;
-        });
+        try {
+            const snapshot = await db.collection('profEvents').orderBy('eventDate', 'asc').get();
+            const container = document.getElementById('eventsList');
+            if (snapshot.empty) { container.innerHTML = '<div class="empty-message">🎉 Мероприятий пока нет</div>'; return; }
+            container.innerHTML = '';
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                container.innerHTML += `<div class="event-card"><div class="event-date">📅 ${data.eventDate}</div><div class="event-title">${escapeHtml(data.title)}</div><div>📍 ${escapeHtml(data.place)}</div><div>${escapeHtml(data.description)}</div></div>`;
+            });
+        } catch(e) { console.error('Ошибка загрузки мероприятий:', e); }
     }
 
     async function loadVouchers() {
-        const snapshot = await db.collection('profVouchers').orderBy('timestamp', 'desc').get();
-        const container = document.getElementById('vouchersList');
-        if (snapshot.empty) { container.innerHTML = '<div class="empty-message">🏖️ Путевок пока нет</div>'; return; }
-        container.innerHTML = '';
-        snapshot.forEach(doc => {
-            const data = doc.data();
-            container.innerHTML += `<div class="event-card"><div class="event-date">🏖️ ${data.voucherType || 'Путевка'}</div><div class="event-title">${escapeHtml(data.title)}</div><div>📍 ${escapeHtml(data.place)}</div><div>📅 ${data.dates || 'Уточняется'}</div><div>💰 ${data.price || 'Уточняется'}</div>${isAdmin ? `<div style="margin-top:12px"><button class="edit-btn action-btn" onclick="editVoucher('${doc.id}')">✏️</button><button class="delete-btn action-btn" onclick="deleteVoucher('${doc.id}')">🗑️</button></div>` : ''}</div>`;
-        });
+        try {
+            const snapshot = await db.collection('profVouchers').orderBy('timestamp', 'desc').get();
+            const container = document.getElementById('vouchersList');
+            if (snapshot.empty) { container.innerHTML = '<div class="empty-message">🏖️ Путевок пока нет</div>'; return; }
+            container.innerHTML = '';
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                container.innerHTML += `<div class="event-card"><div class="event-date">🏖️ ${data.voucherType || 'Путевка'}</div><div class="event-title">${escapeHtml(data.title)}</div><div>📍 ${escapeHtml(data.place)}</div><div>📅 ${data.dates || 'Уточняется'}</div><div>💰 ${data.price || 'Уточняется'}</div></div>`;
+            });
+        } catch(e) { console.error('Ошибка загрузки путевок:', e); }
     }
 
     // Админ-данные
@@ -682,82 +637,82 @@
     }
 
     async function loadPolls() {
-        const snapshot = await db.collection('profPolls').orderBy('timestamp', 'desc').get();
-        const container = document.getElementById('pollsList');
-        if (!container) return;
-        if (snapshot.empty) { container.innerHTML = '<div class="empty-message">🗳️ Голосований пока нет</div>'; return; }
-        container.innerHTML = '';
-        for (const doc of snapshot.docs) {
-            const data = doc.data();
-            const total = Object.values(data.votes || {}).reduce((a,b)=>a+b,0) || 0;
-            let optionsHtml = '';
-            for (const opt of data.options) {
-                const votes = data.votes?.[opt] || 0;
-                const percent = total > 0 ? (votes / total) * 100 : 0;
-                optionsHtml += `<div class="poll-option"><div>${escapeHtml(opt)}</div><div class="poll-result-bar" style="width: ${percent}%"></div><div style="font-size:12px">${votes} голосов (${percent.toFixed(1)}%)</div></div>`;
+        try {
+            const snapshot = await db.collection('profPolls').orderBy('timestamp', 'desc').get();
+            const container = document.getElementById('pollsList');
+            if (!container) return;
+            if (snapshot.empty) { container.innerHTML = '<div class="empty-message">🗳️ Голосований пока нет</div>'; return; }
+            container.innerHTML = '';
+            for (const doc of snapshot.docs) {
+                const data = doc.data();
+                const total = Object.values(data.votes || {}).reduce((a,b)=>a+b,0) || 0;
+                let optionsHtml = '';
+                for (const opt of data.options) {
+                    const votes = data.votes?.[opt] || 0;
+                    const percent = total > 0 ? (votes / total) * 100 : 0;
+                    optionsHtml += `<div class="poll-option"><div>${escapeHtml(opt)}</div><div class="poll-result-bar" style="width: ${percent}%"></div><div style="font-size:12px">${votes} голосов (${percent.toFixed(1)}%)</div></div>`;
+                }
+                const votersList = data.voters ? Object.entries(data.voters).map(([name, choices]) => `${name} (${Array.isArray(choices) ? choices.join(', ') : choices})`).join(', ') : 'никто';
+                container.innerHTML += `<div class="card" style="margin-bottom:15px"><div class="card-header" style="cursor:default; border-bottom:none; padding-bottom:0"><div class="card-title" style="font-size:18px">${escapeHtml(data.question)}</div><div class="badge">${data.type === 'multiple' ? '✅ Несколько ответов' : '🔘 Один ответ'}</div></div>${optionsHtml}<div class="vote-info">✅ Проголосовали: ${votersList}</div>${isAdmin ? `<div style="margin-top:10px"><button class="delete-btn action-btn" onclick="deletePoll('${doc.id}')">🗑️ Удалить</button></div>` : ''}</div>`;
             }
-            const votersList = data.voters ? Object.entries(data.voters).map(([name, choices]) => `${name} (${Array.isArray(choices) ? choices.join(', ') : choices})`).join(', ') : 'никто';
-            container.innerHTML += `<div class="card" style="margin-bottom:15px"><div class="card-header" style="cursor:default; border-bottom:none; padding-bottom:0"><div class="card-title" style="font-size:18px">${escapeHtml(data.question)}</div><div class="badge">${data.type === 'multiple' ? '✅ Несколько ответов' : '🔘 Один ответ'}</div></div>${optionsHtml}<div class="vote-info">✅ Проголосовали: ${votersList}</div>${isAdmin ? `<div style="margin-top:10px"><button class="delete-btn action-btn" onclick="deletePoll('${doc.id}')">🗑️ Удалить</button></div>` : ''}</div>`;
-        }
+        } catch(e) { console.error('Ошибка загрузки голосований:', e); }
     }
 
     async function loadGroupPolls() {
-        const snapshot = await db.collection('profPolls').orderBy('timestamp', 'desc').get();
-        const container = document.getElementById('groupPollsList');
-        if (!container) return;
-        if (snapshot.empty) { container.innerHTML = '<div class="empty-message">🗳️ Активных голосований нет</div>'; return; }
-        container.innerHTML = '';
-        for (const doc of snapshot.docs) {
-            const data = doc.data();
-            const total = Object.values(data.votes || {}).reduce((a,b)=>a+b,0) || 0;
-            const userVoted = data.voters && data.voters[currentUser];
-            let optionsHtml = '';
-            for (const opt of data.options) {
-                const votes = data.votes?.[opt] || 0;
-                const percent = total > 0 ? (votes / total) * 100 : 0;
-                const isSelected = userVoted && ((data.type === 'multiple' && Array.isArray(userVoted) && userVoted.includes(opt)) || userVoted === opt);
-                optionsHtml += `<div class="poll-option ${userVoted ? 'poll-voted' : ''}" onclick="${!userVoted ? `votePoll('${doc.id}', '${opt}', '${data.type}')` : ''}"><div>${escapeHtml(opt)} ${userVoted && isSelected ? '✓' : ''}</div>${userVoted ? `<div class="poll-result-bar" style="width: ${percent}%"></div><div style="font-size:12px">${votes} голосов (${percent.toFixed(1)}%)</div>` : ''}</div>`;
+        if (!currentUser) return;
+        try {
+            const snapshot = await db.collection('profPolls').orderBy('timestamp', 'desc').get();
+            const container = document.getElementById('groupPollsList');
+            if (!container) return;
+            if (snapshot.empty) { container.innerHTML = '<div class="empty-message">🗳️ Активных голосований нет</div>'; return; }
+            container.innerHTML = '';
+            for (const doc of snapshot.docs) {
+                const data = doc.data();
+                const userVoted = data.voters && data.voters[currentUser];
+                let optionsHtml = '';
+                for (const opt of data.options) {
+                    optionsHtml += `<div class="poll-option" onclick="${!userVoted ? `voteForPoll('${doc.id}', '${opt}', '${data.type}')` : ''}"><div>${escapeHtml(opt)} ${userVoted ? '✓' : ''}</div></div>`;
+                }
+                container.innerHTML += `<div class="card" style="margin-bottom:15px"><div class="card-header" style="cursor:default; border-bottom:none; padding-bottom:0"><div class="card-title" style="font-size:18px">${escapeHtml(data.question)}</div><div class="badge">${data.type === 'multiple' ? '✅ Можно выбрать несколько' : '🔘 Только один ответ'}</div></div>${optionsHtml}${!userVoted ? `<div style="margin-top:10px; text-align:center"><button class="admin-btn" onclick="submitGroupVote('${doc.id}')" style="background:var(--primary)">✅ Отправить голос</button></div>` : ''}</div>`;
             }
-            container.innerHTML += `<div class="card" style="margin-bottom:15px"><div class="card-header" style="cursor:default; border-bottom:none; padding-bottom:0"><div class="card-title" style="font-size:18px">${escapeHtml(data.question)}</div><div class="badge">${data.type === 'multiple' ? '✅ Можно выбрать несколько' : '🔘 Только один ответ'}</div></div>${optionsHtml}${userVoted ? '' : `<div style="margin-top:10px; text-align:center"><button class="admin-btn" onclick="submitVote('${doc.id}')" style="background:var(--primary)">✅ Отправить голос</button></div>`}</div>`;
+        } catch(e) { console.error('Ошибка загрузки голосований для группы:', e); }
+    }
+
+    let currentSelections = {};
+
+    function voteForPoll(pollId, option, type) {
+        if (!currentUser) { alert('Только члены профгруппы могут голосовать'); return; }
+        if (type === 'multiple') {
+            if (!currentSelections[pollId]) currentSelections[pollId] = [];
+            if (currentSelections[pollId].includes(option)) {
+                currentSelections[pollId] = currentSelections[pollId].filter(o => o !== option);
+            } else {
+                currentSelections[pollId].push(option);
+            }
+            // Обновляем визуал
+            loadGroupPolls();
+        } else {
+            // Одиночный ответ - голосуем сразу
+            submitSingleVote(pollId, option);
         }
     }
 
-    let currentVoteSelections = {};
-
-    async function votePoll(pollId, option, type) {
-        if (!currentUser) { alert('Только члены профгруппы могут голосовать'); return; }
+    async function submitSingleVote(pollId, option) {
         const docRef = db.collection('profPolls').doc(pollId);
         const doc = await docRef.get();
         const data = doc.data();
         if (data.voters && data.voters[currentUser]) { alert('Вы уже проголосовали'); return; }
-        
-        if (type === 'multiple') {
-            if (!currentVoteSelections[pollId]) currentVoteSelections[pollId] = [];
-            if (currentVoteSelections[pollId].includes(option)) {
-                currentVoteSelections[pollId] = currentVoteSelections[pollId].filter(o => o !== option);
-            } else {
-                currentVoteSelections[pollId].push(option);
-            }
-            // Визуально отмечаем выбранные опции
-            document.querySelectorAll(`.poll-option`).forEach(el => {
-                if (el.innerText.includes(option)) {
-                    el.classList.toggle('selected');
-                }
-            });
-        } else {
-            // Одиночный ответ - голосуем сразу
-            const votes = data.votes || {};
-            votes[option] = (votes[option] || 0) + 1;
-            const voters = data.voters || {};
-            voters[currentUser] = option;
-            await docRef.update({ votes, voters });
-            loadGroupPolls();
-            loadPolls();
-        }
+        const votes = data.votes || {};
+        votes[option] = (votes[option] || 0) + 1;
+        const voters = data.voters || {};
+        voters[currentUser] = option;
+        await docRef.update({ votes, voters });
+        loadGroupPolls();
+        loadPolls();
     }
 
-    async function submitVote(pollId) {
-        const selections = currentVoteSelections[pollId];
+    async function submitGroupVote(pollId) {
+        const selections = currentSelections[pollId];
         if (!selections || selections.length === 0) { alert('Выберите хотя бы один вариант'); return; }
         const docRef = db.collection('profPolls').doc(pollId);
         const doc = await docRef.get();
@@ -769,72 +724,80 @@
         const voters = data.voters || {};
         voters[currentUser] = selections;
         await docRef.update({ votes, voters });
-        delete currentVoteSelections[pollId];
+        delete currentSelections[pollId];
         loadGroupPolls();
         loadPolls();
     }
 
     async function loadGroupList() {
-        const onlineSnapshot = await db.collection('profGroupOnline').get();
-        const onlineUsers = {};
-        onlineSnapshot.forEach(doc => { onlineUsers[doc.data().user] = doc.data().lastSeen; });
-        
-        const pollsSnapshot = await db.collection('profPolls').get();
-        const votedUsers = {};
-        pollsSnapshot.forEach(doc => {
-            const data = doc.data();
-            if (data.voters) {
-                Object.keys(data.voters).forEach(user => { votedUsers[user] = true; });
+        try {
+            const onlineSnapshot = await db.collection('profGroupOnline').get();
+            const onlineUsers = {};
+            onlineSnapshot.forEach(doc => { onlineUsers[doc.data().user] = doc.data().lastSeen; });
+            
+            const pollsSnapshot = await db.collection('profPolls').get();
+            const votedUsers = {};
+            pollsSnapshot.forEach(doc => {
+                const data = doc.data();
+                if (data.voters) {
+                    Object.keys(data.voters).forEach(user => { votedUsers[user] = true; });
+                }
+            });
+            
+            const container = document.getElementById('groupList');
+            container.innerHTML = '';
+            for (const [login, pass] of Object.entries(users)) {
+                const isOnline = onlineUsers[login] && (Date.now() - onlineUsers[login] < 60000);
+                const hasVoted = votedUsers[login];
+                container.innerHTML += `<div class="group-member"><span><b>${login}</b></span><span class="${isOnline ? 'group-online' : 'group-offline'}">${isOnline ? '🟢 Онлайн' : '⚫ Офлайн'}</span><span class="group-voted">${hasVoted ? '✅ Проголосовал' : '⏳ Ещё не голосовал'}</span></div>`;
             }
-        });
-        
-        const container = document.getElementById('groupList');
-        container.innerHTML = '';
-        for (const [login, pass] of Object.entries(users)) {
-            const isOnline = onlineUsers[login] && (Date.now() - onlineUsers[login] < 60000);
-            const hasVoted = votedUsers[login];
-            container.innerHTML += `<div class="group-member"><span><b>${login}</b></span><span class="${isOnline ? 'group-online' : 'group-offline'}">${isOnline ? '🟢 Онлайн' : '⚫ Офлайн'}</span><span class="group-voted">${hasVoted ? '✅ Проголосовал' : '⏳ Ещё не голосовал'}</span></div>`;
-        }
+        } catch(e) { console.error('Ошибка загрузки списка группы:', e); }
     }
 
-    // Админ-функции (редактирование)
+    // ========== АДМИН-ФУНКЦИИ ==========
     let currentEditId = null;
 
     async function loadExpenses() {
-        const snapshot = await db.collection('profExpenses').orderBy('date', 'desc').get();
-        const tbody = document.querySelector('#expensesTable tbody');
-        if (!tbody) return;
-        tbody.innerHTML = '';
-        snapshot.forEach(doc => {
-            const data = doc.data();
-            tbody.innerHTML += `<tr><td>${data.date}</td><td>${escapeHtml(data.category)}</td><td>${data.amount} ₽</td><td>${escapeHtml(data.comment || '')}</td><td><button class="edit-btn action-btn" onclick="editExpense('${doc.id}')">✏️</button><button class="delete-btn action-btn" onclick="deleteExpense('${doc.id}')">🗑️</button></td></tr>`;
-        });
+        try {
+            const snapshot = await db.collection('profExpenses').orderBy('date', 'desc').get();
+            const tbody = document.querySelector('#expensesTable tbody');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                tbody.innerHTML += `<tr><td>${data.date}</td><td>${escapeHtml(data.category)}</td><td>${data.amount} ₽</td><td>${escapeHtml(data.comment || '')}</td><td><button class="edit-btn action-btn" onclick="editExpense('${doc.id}')">✏️</button><button class="delete-btn action-btn" onclick="deleteExpense('${doc.id}')">🗑️</button></td></tr>`;
+            });
+        } catch(e) { console.error('Ошибка загрузки расходов:', e); }
     }
 
     async function loadJubilees() {
-        const snapshot = await db.collection('profJubilees').orderBy('jubileeDate', 'asc').get();
-        const tbody = document.querySelector('#jubileeTable tbody');
-        if (!tbody) return;
-        tbody.innerHTML = '';
-        snapshot.forEach(doc => {
-            const data = doc.data();
-            tbody.innerHTML += `<tr><td>${escapeHtml(data.name)}</td><td>${data.birthDate}</td><td>${data.jubileeDate}</td><td>${escapeHtml(data.congratsType)}</td><td><span class="badge">${data.status || 'Предстоит'}</span></td><td><button class="edit-btn action-btn" onclick="editJubilee('${doc.id}')">✏️</button><button class="delete-btn action-btn" onclick="deleteJubilee('${doc.id}')">🗑️</button></td></tr>`;
-        });
+        try {
+            const snapshot = await db.collection('profJubilees').orderBy('jubileeDate', 'asc').get();
+            const tbody = document.querySelector('#jubileeTable tbody');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                tbody.innerHTML += `<tr><td>${escapeHtml(data.name)}</td><td>${data.birthDate}</td><td>${data.jubileeDate}</td><td>${escapeHtml(data.congratsType)}</td><td><span class="badge">${data.status || 'Предстоит'}</span></td><td><button class="edit-btn action-btn" onclick="editJubilee('${doc.id}')">✏️</button><button class="delete-btn action-btn" onclick="deleteJubilee('${doc.id}')">🗑️</button></td></tr>`;
+            });
+        } catch(e) { console.error('Ошибка загрузки юбиляров:', e); }
     }
 
     async function loadRewards() {
-        const year = document.getElementById('yearFilter')?.value || '2024';
-        const snapshot = await db.collection('profRewards').where('year', '==', year).orderBy('date', 'desc').get();
-        const tbody = document.querySelector('#rewardsTable tbody');
-        if (!tbody) return;
-        tbody.innerHTML = '';
-        snapshot.forEach(doc => {
-            const data = doc.data();
-            tbody.innerHTML += `<tr><td>${escapeHtml(data.name)}</td><td>${escapeHtml(data.type)}</td><td>${data.date}</td><td>${escapeHtml(data.orderNumber || '')}</td><td><button class="edit-btn action-btn" onclick="editReward('${doc.id}')">✏️</button><button class="delete-btn action-btn" onclick="deleteReward('${doc.id}')">🗑️</button></td></tr>`;
-        });
+        try {
+            const year = document.getElementById('yearFilter')?.value || '2024';
+            const snapshot = await db.collection('profRewards').where('year', '==', year).orderBy('date', 'desc').get();
+            const tbody = document.querySelector('#rewardsTable tbody');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                tbody.innerHTML += `<tr><td>${escapeHtml(data.name)}</td><td>${escapeHtml(data.type)}</td><td>${data.date}</td><td>${escapeHtml(data.orderNumber || '')}</td><td><button class="edit-btn action-btn" onclick="editReward('${doc.id}')">✏️</button><button class="delete-btn action-btn" onclick="deleteReward('${doc.id}')">🗑️</button></td></tr>`;
+            });
+        } catch(e) { console.error('Ошибка загрузки поощрений:', e); }
     }
 
-    // Модальные окна
+    // Функции для модальных окон
     function openNewsModal(editId, title, desc) {
         currentEditId = editId || null;
         document.getElementById('modalTitle').innerHTML = editId ? '✏️ Редактировать новость' : '➕ Добавить новость';
@@ -965,6 +928,7 @@
         });
     });
 
+    // Экспорт функций в глобальную область
     window.showLoginModal = showLoginModal;
     window.closeLoginModal = closeLoginModal;
     window.doLogin = doLogin;
@@ -991,8 +955,8 @@
     window.saveJubilee = saveJubilee;
     window.openRewardModal = openRewardModal;
     window.saveReward = saveReward;
-    window.votePoll = votePoll;
-    window.submitVote = submitVote;
+    window.voteForPoll = voteForPoll;
+    window.submitGroupVote = submitGroupVote;
     window.closeModal = closeModal;
     window.closeModalOnClick = closeModalOnClick;
 </script>
