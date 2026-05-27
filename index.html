@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Профгруппа Дирекции связи</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -179,6 +183,12 @@
         .page { display: none; }
         .page.active { display: block; }
 
+        .empty-message {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+
         footer {
             text-align: center;
             padding: 20px;
@@ -233,7 +243,7 @@
     <div id="groupPage" class="page">
         <div class="card">
             <div class="card-title">👥 Члены профгруппы</div>
-            <div id="groupList"></div>
+            <div id="groupList" style="display: flex; flex-direction: column; gap: 8px;"></div>
         </div>
         <div class="card">
             <div class="card-title">🗳️ Голосования</div>
@@ -289,7 +299,7 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    // ========== ДАННЫЕ ДЛЯ ВХОДА ==========
+    // Данные для входа
     const USERS = {
         'НСЭ': '66',
         'ЦТУ': '10',
@@ -309,7 +319,7 @@
     loadEvents();
     loadVouchers();
 
-    // ========== ВХОД ==========
+    // Вход
     document.getElementById('showLoginBtn').onclick = () => {
         document.getElementById('loginModal').style.display = 'flex';
     };
@@ -318,14 +328,9 @@
         const login = document.getElementById('loginUser').value.trim();
         const pass = document.getElementById('loginPass').value.trim();
         
-        console.log('Попытка входа:', login, pass);
-        console.log('Доступные пользователи:', USERS);
-        
         if (USERS[login] && USERS[login] === pass) {
             currentUser = login;
             isAdmin = (login === 'НСЭ');
-            
-            console.log('Успешный вход!', currentUser, isAdmin);
             
             // Меняем интерфейс
             document.getElementById('authSection').innerHTML = `
@@ -349,7 +354,6 @@
             closeLoginModal();
             alert('Вход выполнен! Добро пожаловать, ' + currentUser);
         } else {
-            console.log('Ошибка входа: неверный логин или пароль');
             alert('Неверный логин или пароль');
         }
     };
@@ -370,114 +374,121 @@
             document.getElementById('loginModal').style.display = 'flex';
         };
         alert('Вы вышли из системы');
-        // Возвращаемся на новости
         document.querySelector('.nav-tab[data-page="news"]').click();
     }
 
-    // ========== ЗАГРУЗКА ДАННЫХ ==========
+    // Загрузка данных
     async function loadNews() {
-        const snapshot = await db.collection('news').get();
-        const container = document.getElementById('newsList');
-        if (snapshot.empty) { container.innerHTML = '<div class="empty-message">📭 Новостей пока нет</div>'; return; }
-        container.innerHTML = '';
-        snapshot.forEach(doc => {
-            const data = doc.data();
-            container.innerHTML += `
-                <div class="event-card">
-                    <div class="event-title">${escapeHtml(data.title)}</div>
-                    <div>${escapeHtml(data.text || data.description || '')}</div>
-                </div>
-            `;
-        });
+        try {
+            const snapshot = await db.collection('news').get();
+            const container = document.getElementById('newsList');
+            if (snapshot.empty) { container.innerHTML = '<div class="empty-message">📭 Новостей пока нет</div>'; return; }
+            container.innerHTML = '';
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                container.innerHTML += `
+                    <div class="event-card">
+                        <div class="event-title">${escapeHtml(data.title)}</div>
+                        <div>${escapeHtml(data.text || data.description || '')}</div>
+                    </div>
+                `;
+            });
+        } catch(e) { console.error(e); }
     }
 
     async function loadEvents() {
-        const snapshot = await db.collection('events').get();
-        const container = document.getElementById('eventsList');
-        if (snapshot.empty) { container.innerHTML = '<div class="empty-message">🎉 Мероприятий пока нет</div>'; return; }
-        container.innerHTML = '';
-        snapshot.forEach(doc => {
-            const data = doc.data();
-            container.innerHTML += `
-                <div class="event-card">
-                    <div class="event-title">${escapeHtml(data.title)}</div>
-                    <div>${escapeHtml(data.place || '')}</div>
-                    <div>${escapeHtml(data.desc || '')}</div>
-                </div>
-            `;
-        });
+        try {
+            const snapshot = await db.collection('events').get();
+            const container = document.getElementById('eventsList');
+            if (snapshot.empty) { container.innerHTML = '<div class="empty-message">🎉 Мероприятий пока нет</div>'; return; }
+            container.innerHTML = '';
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                container.innerHTML += `
+                    <div class="event-card">
+                        <div class="event-title">${escapeHtml(data.title)}</div>
+                        <div>${escapeHtml(data.place || '')}</div>
+                    </div>
+                `;
+            });
+        } catch(e) { console.error(e); }
     }
 
     async function loadVouchers() {
-        const snapshot = await db.collection('vouchers').get();
-        const container = document.getElementById('vouchersList');
-        if (snapshot.empty) { container.innerHTML = '<div class="empty-message">🏖️ Путевок пока нет</div>'; return; }
-        container.innerHTML = '';
-        snapshot.forEach(doc => {
-            const data = doc.data();
-            container.innerHTML += `
-                <div class="event-card">
-                    <div class="event-title">${escapeHtml(data.title)}</div>
-                    <div>${escapeHtml(data.place || '')}</div>
-                    <div>${escapeHtml(data.dates || '')}</div>
-                </div>
-            `;
-        });
+        try {
+            const snapshot = await db.collection('vouchers').get();
+            const container = document.getElementById('vouchersList');
+            if (snapshot.empty) { container.innerHTML = '<div class="empty-message">🏖️ Путевок пока нет</div>'; return; }
+            container.innerHTML = '';
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                container.innerHTML += `
+                    <div class="event-card">
+                        <div class="event-title">${escapeHtml(data.title)}</div>
+                        <div>${escapeHtml(data.place || '')}</div>
+                    </div>
+                `;
+            });
+        } catch(e) { console.error(e); }
     }
 
     async function loadGroupList() {
         const container = document.getElementById('groupList');
         let html = '';
         for (const login of Object.keys(USERS)) {
-            html += `<div class="group-member" style="background:#f5f0e8; border-radius:12px; padding:10px; margin-bottom:8px;"><b>${login}</b></div>`;
+            html += `<div style="background:#f5f0e8; border-radius:12px; padding:10px;"><b>${login}</b></div>`;
         }
         container.innerHTML = html;
     }
 
     async function loadGroupPolls() {
-        const snapshot = await db.collection('polls').get();
-        const container = document.getElementById('groupPollsList');
-        if (snapshot.empty) { container.innerHTML = '<div class="empty-message">🗳️ Голосований пока нет</div>'; return; }
-        container.innerHTML = '';
-        snapshot.forEach(doc => {
-            const data = doc.data();
-            container.innerHTML += `
-                <div class="card" style="margin-bottom:15px">
-                    <div class="card-title">${escapeHtml(data.question)}</div>
-                    <div>Варианты: ${data.options ? data.options.join(', ') : ''}</div>
-                </div>
-            `;
-        });
+        try {
+            const snapshot = await db.collection('polls').get();
+            const container = document.getElementById('groupPollsList');
+            if (snapshot.empty) { container.innerHTML = '<div class="empty-message">🗳️ Голосований пока нет</div>'; return; }
+            container.innerHTML = '';
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                container.innerHTML += `
+                    <div class="card" style="margin-bottom:15px">
+                        <div class="card-title">${escapeHtml(data.question)}</div>
+                    </div>
+                `;
+            });
+        } catch(e) { console.error(e); }
     }
 
     async function loadPolls() {
-        const snapshot = await db.collection('polls').get();
-        const container = document.getElementById('pollsList');
-        if (snapshot.empty) { container.innerHTML = '<div class="empty-message">🗳️ Голосований пока нет</div>'; return; }
-        container.innerHTML = '';
-        snapshot.forEach(doc => {
-            const data = doc.data();
-            container.innerHTML += `
-                <div class="card" style="margin-bottom:15px">
-                    <div class="card-title">${escapeHtml(data.question)}</div>
-                    <div>Варианты: ${data.options ? data.options.join(', ') : ''}</div>
-                </div>
-            `;
-        });
+        try {
+            const snapshot = await db.collection('polls').get();
+            const container = document.getElementById('pollsList');
+            if (snapshot.empty) { container.innerHTML = '<div class="empty-message">🗳️ Голосований пока нет</div>'; return; }
+            container.innerHTML = '';
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                container.innerHTML += `
+                    <div class="card" style="margin-bottom:15px">
+                        <div class="card-title">${escapeHtml(data.question)}</div>
+                    </div>
+                `;
+            });
+        } catch(e) { console.error(e); }
     }
 
     async function loadExpenses() {
-        const snapshot = await db.collection('expenses').get();
-        const container = document.getElementById('expensesList');
-        if (snapshot.empty) { container.innerHTML = '<div class="empty-message">💰 Расходов пока нет</div>'; return; }
-        container.innerHTML = '';
-        snapshot.forEach(doc => {
-            const data = doc.data();
-            container.innerHTML += `<div style="padding:8px; border-bottom:1px solid #eee;">${data.date} - ${data.category}: ${data.amount} ₽</div>`;
-        });
+        try {
+            const snapshot = await db.collection('expenses').get();
+            const container = document.getElementById('expensesList');
+            if (snapshot.empty) { container.innerHTML = '<div class="empty-message">💰 Расходов пока нет</div>'; return; }
+            container.innerHTML = '';
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                container.innerHTML += `<div style="padding:8px; border-bottom:1px solid #eee;">${data.date} - ${data.category}: ${data.amount} ₽</div>`;
+            });
+        } catch(e) { console.error(e); }
     }
 
-    // ========== ФУНКЦИИ ДЛЯ АДМИНА ==========
+    // Админ-функции
     function openPollModal() {
         document.getElementById('modalTitle').innerHTML = '🗳️ Создать голосование';
         document.getElementById('modalBody').innerHTML = `
@@ -523,7 +534,7 @@
         loadExpenses();
     }
 
-    // ========== НАВИГАЦИЯ ==========
+    // Навигация
     document.querySelectorAll('.nav-tab').forEach(tab => {
         tab.addEventListener('click', () => {
             document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
