@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Профгруппа Дирекции связи | Роспрофжел</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #fff5f0 0%, #ffe8e0 100%);
+            min-height: 100vh;
+            color: #2c1810;
+        }
+
+        :root {
+            --primary: #8b1e1e;
+            --primary-light: #b33a3a;
+            --secondary: #d4a017;
+            --secondary-light: #fef0cc;
+            --bg-card: #ffffff;
+            --bg-page: #fff5f0;
+            --text: #2c1810;
+            --text-light: #6b4c3a;
+            --border: #f0d8cc;
+            --success: #2e7d32;
+            --danger: #c62828;
+            --info: #1565c0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 30px;
+            padding: 20px 30px;
+            margin-bottom: 25px;
+            color: white;
+            box-shadow: 0 5px 20px rgba(139,30,30,0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .header h1 {
+            font-size: 26px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .login-btn {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.5);
+            padding: 8px 20px;
+            border-radius: 40px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .login-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        .user-info {
+            background: rgba(255,255,255,0.15);
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logout-btn {
+            background: rgba(0,0,0,0.3);
+            border: none;
+            padding: 4px 12px;
+            border-radius: 30px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 25px;
+            background: white;
+            padding: 8px;
+            border-radius: 50px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .nav-tab {
+            padding: 10px 22px;
+            border: none;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 600;
+            background: transparent;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .nav-tab:hover {
+            background: rgba(139,30,30,0.1);
+            color: var(--primary);
+        }
+        .nav-tab.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 3px 10px rgba(139,30,30,0.3);
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            border: 1px solid var(--border);
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+        .card-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .collapse-icon {
+            font-size: 20px;
+            transition: transform 0.2s;
+            color: var(--secondary);
+        }
+        .collapse-icon.collapsed {
+            transform: rotate(-90deg);
+        }
+        .card-content {
+            margin-top: 15px;
+        }
+        .card-content.collapsed {
+            display: none;
+        }
+
+        .admin-panel {
+            background: var(--secondary-light);
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .admin-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .admin-btn:hover {
+            background: var(--primary-light);
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+        .event-card {
+            background: white;
+            border-radius: 20px;
+            padding: 18px;
+            border-left: 4px solid var(--primary);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .event-date {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 12px;
+        }
+        .event-title {
+            font-size: 17px;
+            font-weight: bold;
+            margin: 10px 0 8px;
+            color: var(--primary);
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        th, td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            background: var(--secondary-light);
+            color: var(--text);
+            font-weight: 600;
+        }
+        .action-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 4px 6px;
+        }
+        .edit-btn { color: var(--info); }
+        .delete-btn { color: var(--danger); }
+
+        .poll-option {
+            background: var(--secondary-light);
+            border-radius: 14px;
+            padding: 12px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .poll-option:hover {
+            background: #ffd4b0;
+        }
+        .poll-option.selected {
+            background: #ffd4b0;
+            border-left: 4px solid var(--primary);
+        }
+        .poll-result-bar {
+            height: 24px;
+            background: var(--primary);
+            border-radius: 12px;
+            margin: 6px 0;
+            transition: width 0.4s ease;
+        }
+        .poll-voted {
+            cursor: default;
+            opacity: 0.8;
+        }
+        .vote-info {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-top: 10px;
+            padding: 8px;
+            background: var(--secondary-light);
+            border-radius: 12px;
+        }
+
+        .group-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .group-member {
+            background: var(--secondary-light);
+            border-radius: 12px;
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .group-online {
+            color: var(--success);
+            font-weight: bold;
+        }
+        .group-offline {
+            color: var(--danger);
+        }
+        .group-voted {
+            color: var(--primary);
+            font-size: 12px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background: white;
+            border-radius: 24px;
+            padding: 24px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 26px;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            font-size: 14px;
+        }
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: normal;
+            cursor: pointer;
+        }
+
+        .badge {
+            background: var(--secondary-light);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+        }
+
+        .page { display: none; }
+        .page.active { display: block; }
+        .admin-only { display: none; }
+        .group-only { display: none; }
+
+        .empty-message {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-light);
+        }
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-light);
+            font-size: 11px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>🚂 Профгруппа Дирекции связи</h1>
+        <div id="authSection">
+            <button class="login-btn" onclick="showLoginModal()">🔐 Вход для профгруппы</button>
+        </div>
+    </div>
+
+    <div class="nav-tabs">
+        <button class="nav-tab active" data-page="news">📰 Новости</button>
+        <button class="nav-tab" data-page="events">🎉 Мероприятия</button>
+        <button class="nav-tab" data-page="vouchers">🏖️ Путевки</button>
+        <button class="nav-tab admin-only" data-page="admin" style="display:none;">⚙️ Управление</button>
+        <button class="nav-tab group-only" data-page="group" style="display:none;">👥 Группа</button>
+    </div>
+
+    <!-- НОВОСТИ (видят все) -->
+    <div id="newsPage" class="page active">
+        <div class="admin-panel admin-only" style="display:none;">
+            <span>📝 Управление новостями</span>
+            <button class="admin-btn" onclick="openNewsModal()">+ Добавить новость</button>
+        </div>
+        <div id="newsList" class="events-grid"></div>
+    </div>
+
+    <!-- МЕРОПРИЯТИЯ (видят все) -->
+    <div id="eventsPage" class="page">
+        <div class="admin-panel admin-only" style="display:none;">
+            <span>🎉 Управление мероприятиями</span>
+            <button class="admin-btn" onclick="openEventModal()">+ Добавить мероприятие</button>
+        </div>
+        <div id="eventsList" class="events-grid"></div>
+    </div>
+
+    <!-- ПУТЕВКИ (видят все) -->
+    <div id="vouchersPage" class="page">
+        <div class="admin-panel admin-only" style="display:none;">
+            <span>🏖️ Управление путевками</span>
+            <button class="admin-btn" onclick="openVoucherModal()">+ Добавить путевку</button>
+        </div>
+        <div id="vouchersList" class="events-grid"></div>
+    </div>
+
+    <!-- АДМИН-ПАНЕЛЬ (только профгруппорг) -->
+    <div id="adminPage" class="page">
+        <!-- Голосования -->
+        <div class="card">
+            <div class="card-header" onclick="toggleCollapse('pollsCard')">
+                <div class="card-title">🗳️ Голосования</div>
+                <span class="collapse-icon" id="pollsCardIcon">▼</span>
+            </div>
+            <div id="pollsCardContent" class="card-content">
+                <div id="pollsList"></div>
+                <button class="admin-btn" onclick="openPollModal()" style="margin-top: 10px;">+ Создать голосование</button>
+            </div>
+        </div>
+
+        <!-- Расходы -->
+        <div class="card">
+            <div class="card-header" onclick="toggleCollapse('expensesCard')">
+                <div class="card-title">💰 Расходы профгруппы</div>
+                <span class="collapse-icon" id="expensesCardIcon">▼</span>
+            </div>
+            <div id="expensesCardContent" class="card-content">
+                <div class="table-wrapper"><table id="expensesTable"><thead><tr><th>Дата</th><th>Статья</th><th>Сумма</th><th>Комментарий</th><th></th></tr></thead><tbody></tbody></table></div>
+                <button class="admin-btn" onclick="openExpenseModal()" style="margin-top: 10px;">+ Добавить расход</button>
+            </div>
+        </div>
+
+        <!-- Юбиляры -->
+        <div class="card">
+            <div class="card-header" onclick="toggleCollapse('jubileeCard')">
+                <div class="card-title">🎂 Юбиляры</div>
+                <span class="collapse-icon" id="jubileeCardIcon">▼</span>
+            </div>
+            <div id="jubileeCardContent" class="card-content">
+                <div class="table-wrapper"><table id="jubileeTable"><thead><tr><th>ФИО</th><th>Дата рождения</th><th>Дата юбилея</th><th>Поздравление</th><th>Статус</th><th></th></tr></thead><tbody></tbody></table></div>
+                <button class="admin-btn" onclick="openJubileeModal()" style="margin-top: 10px;">+ Добавить юбиляра</button>
+            </div>
+        </div>
+
+        <!-- Поощрения -->
+        <div class="card">
+            <div class="card-header" onclick="toggleCollapse('rewardsCard')">
+                <div class="card-title">🏆 Поощрения сотрудников</div>
+                <span class="collapse-icon" id="rewardsCardIcon">▼</span>
+            </div>
+            <div id="rewardsCardContent" class="card-content">
+                <div style="display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap;">
+                    <select id="yearFilter" onchange="loadRewards()" style="padding:8px 15px; border-radius:30px; border:1px solid var(--border);">
+                        <option value="2020">2020</option><option value="2021">2021</option><option value="2022">2022</option>
+                        <option value="2023">2023</option><option value="2024" selected>2024</option>
+                        <option value="2025">2025</option><option value="2026">2026</option><option value="2027">2027</option>
+                    </select>
+                    <button class="admin-btn" onclick="openRewardModal()">+ Добавить поощрение</button>
+                </div>
+                <div class="table-wrapper"><table id="rewardsTable"><thead><tr><th>ФИО</th><th>Вид поощрения</th><th>Дата</th><th>Приказ</th><th></th></tr></thead><tbody></tbody></table></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- СТРАНИЦА ГРУППЫ (только после входа) -->
+    <div id="groupPage" class="page">
+        <div class="card">
+            <div class="card-title">👥 Члены профгруппы (онлайн)</div>
+            <div id="groupList" class="group-list"></div>
+        </div>
+        <div class="card">
+            <div class="card-header" onclick="toggleCollapse('groupPollsCard')">
+                <div class="card-title">🗳️ Активные голосования</div>
+                <span class="collapse-icon" id="groupPollsCardIcon">▼</span>
+            </div>
+            <div id="groupPollsCardContent" class="card-content">
+                <div id="groupPollsList"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>© 2025 Профгруппа Дирекции связи | Роспрофжел</footer>
+</div>
+
+<!-- Модальное окно входа -->
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header"><h3>🔐 Вход в профгруппу</h3><button class="close-modal" onclick="closeLoginModal()">&times;</button></div>
+        <div class="form-group"><label>Логин</label><input type="text" id="loginUser" placeholder="Логин"></div>
+        <div class="form-group"><label>Пароль</label><input type="password" id="loginPass" placeholder="Пароль"></div>
+        <button class="admin-btn" style="width:100%" onclick="doLogin()">Войти</button>
+    </div>
+</div>
+
+<!-- Модальное окно для форм -->
+<div id="modal" class="modal" onclick="closeModalOnClick(event)">
+    <div class="modal-content">
+        <div class="modal-header"><h3 id="modalTitle">Добавить</h3><button class="close-modal" onclick="closeModal()">&times;</button></div>
+        <div id="modalBody"></div>
+    </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyC68WrjVaCkf5kEGfoGkw1tx-ECsc42D1c",
+  authDomain: "my-new-projekt2.firebaseapp.com",
+  projectId: "my-new-projekt2",
+  storageBucket: "my-new-projekt2.firebasestorage.app",
+  messagingSenderId: "630983568534",
+  appId: "1:630983568534:web:99d4a8a93126b9ab04e6b7",
+  measurementId: "G-CL7NJR1RNW"
+};
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // Учётные данные
+    const users = {
+        'НСЭ': '66',
+        'ЦТУ': '10',
+        'НСТ': '10',
+        'НСАО': '11',
+        'НСК': '40',
+        'НСТ1': '26',
+        'НСФЭ': '45',
+        'НСДР': '13'
+    };
+    const adminLogin = 'НСЭ';
+
+    let currentUser = null;
+    let isAdmin = false;
+
+    // Загружаем публичные данные сразу (без входа)
+    loadPublicData();
+    // Запускаем обновление онлайн-статуса только для залогиненных
+    setInterval(async () => {
+        if (currentUser) {
+            await db.collection('profGroupOnline').doc(currentUser).set({ lastSeen: Date.now(), user: currentUser });
+        }
+    }, 30000);
+
+    function showLoginModal() { document.getElementById('loginModal').style.display = 'flex'; }
+    function closeLoginModal() { document.getElementById('loginModal').style.display = 'none'; }
+
+    async function doLogin() {
+        const login = document.getElementById('loginUser').value;
+        const pass = document.getElementById('loginPass').value;
+        
+        if (users[login] && users[login] === pass) {
+            isAdmin = (login === adminLogin);
+            currentUser = login;
+        } else {
+            alert('Неверный логин или пароль');
+            return;
+        }
+        
+        closeLoginModal();
+        
+        // Обновляем статус онлайн
+        await db.collection('profGroupOnline').doc(currentUser).set({ lastSeen: Date.now(), user: currentUser });
+        
+        document.getElementById('authSection').innerHTML = `<div class="user-info">👤 ${currentUser} ${isAdmin ? '(Админ)' : ''}<button class="logout-btn" onclick="logout()">Выйти</button></div>`;
+        
+        if (isAdmin) {
+            document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'block');
+        }
+        document.querySelectorAll('.group-only').forEach(el => el.style.display = 'block');
+        document.querySelector('.nav-tab[data-page="admin"]').style.display = isAdmin ? 'block' : 'none';
+        document.querySelector('.nav-tab[data-page="group"]').style.display = 'block';
+        
+        loadAdminData();
+        loadGroupData();
+    }
+
+    async function logout() {
+        if (currentUser) {
+            await db.collection('profGroupOnline').doc(currentUser).delete();
+        }
+        currentUser = null;
+        isAdmin = false;
+        document.getElementById('authSection').innerHTML = `<button class="login-btn" onclick="showLoginModal()">🔐 Вход для профгруппы</button>`;
+        document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'none');
+        document.querySelectorAll('.group-only').forEach(el => el.style.display = 'none');
+        document.querySelector('.nav-tab[data-page="admin"]').style.display = 'none';
+        document.querySelector('.nav-tab[data-page="group"]').style.display = 'none';
+        if (document.querySelector('.nav-tab.active')?.dataset.page === 'admin' || document.querySelector('.nav-tab.active')?.dataset.page === 'group') {
+            document.querySelector('.nav-tab[data-page="news"]').click();
+        }
+    }
+
+    function toggleCollapse(cardId) {
+        const content = document.getElementById(`${cardId}Content`);
+        const icon = document.getElementById(`${cardId}Icon`);
+        if (content && icon) {
+            content.classList.toggle('collapsed');
+            icon.classList.toggle('collapsed');
+        }
+    }
+
+    // Публичные данные (видят все без входа)
+    async function loadPublicData() {
+        loadNews();
+        loadEvents();
+        loadVouchers();
+    }
+
+    async function loadNews() {
+        const snapshot = await db.collection('profNews').orderBy('timestamp', 'desc').get();
+        const container = document.getElementById('newsList');
+        if (snapshot.empty) { container.innerHTML = '<div class="empty-message">📭 Новостей пока нет</div>'; return; }
+        container.innerHTML = '';
+        snapshot.forEach(doc => {
+            const data = doc.data();
+            container.innerHTML += `<div class="event-card"><div class="event-date">📅 ${new Date(data.timestamp).toLocaleDateString()}</div><div class="event-title">${escapeHtml(data.title)}</div><div>${escapeHtml(data.description)}</div>${isAdmin ? `<div style="margin-top:12px"><button class="edit-btn action-btn" onclick="editNews('${doc.id}','${escapeHtml(data.title)}','${escapeHtml(data.description)}')">✏️</button><button class="delete-btn action-btn" onclick="deleteNews('${doc.id}')">🗑️</button></div>` : ''}</div>`;
+        });
+    }
+
+    async function loadEvents() {
+        const snapshot = await db.collection('profEvents').orderBy('eventDate', 'asc').get();
+        const container = document.getElementById('eventsList');
+        if (snapshot.empty) { container.innerHTML = '<div class="empty-message">🎉 Мероприятий пока нет</div>'; return; }
+        container.innerHTML = '';
+        snapshot.forEach(doc => {
+            const data = doc.data();
+            container.innerHTML += `<div class="event-card"><div class="event-date">📅 ${data.eventDate}</div><div class="event-title">${escapeHtml(data.title)}</div><div>📍 ${escapeHtml(data.place)}</div><div>${escapeHtml(data.description)}</div>${isAdmin ? `<div style="margin-top:12px"><button class="edit-btn action-btn" onclick="editEvent('${doc.id}')">✏️</button><button class="delete-btn action-btn" onclick="deleteEvent('${doc.id}')">🗑️</button></div>` : ''}</div>`;
+        });
+    }
+
+    async function loadVouchers() {
+        const snapshot = await db.collection('profVouchers').orderBy('timestamp', 'desc').get();
+        const container = document.getElementById('vouchersList');
+        if (snapshot.empty) { container.innerHTML = '<div class="empty-message">🏖️ Путевок пока нет</div>'; return; }
+        container.innerHTML = '';
+        snapshot.forEach(doc => {
+            const data = doc.data();
+            container.innerHTML += `<div class="event-card"><div class="event-date">🏖️ ${data.voucherType || 'Путевка'}</div><div class="event-title">${escapeHtml(data.title)}</div><div>📍 ${escapeHtml(data.place)}</div><div>📅 ${data.dates || 'Уточняется'}</div><div>💰 ${data.price || 'Уточняется'}</div>${isAdmin ? `<div style="margin-top:12px"><button class="edit-btn action-btn" onclick="editVoucher('${doc.id}')">✏️</button><button class="delete-btn action-btn" onclick="deleteVoucher('${doc.id}')">🗑️</button></div>` : ''}</div>`;
+        });
+    }
+
+    // Админ-данные
+    async function loadAdminData() {
+        loadPolls();
+        loadExpenses();
+        loadJubilees();
+        loadRewards();
+    }
+
+    async function loadGroupData() {
+        loadGroupList();
+        loadGroupPolls();
+    }
+
+    async function loadPolls() {
+        const snapshot = await db.collection('profPolls').orderBy('timestamp', 'desc').get();
+        const container = document.getElementById('pollsList');
+        if (!container) return;
+        if (snapshot.empty) { container.innerHTML = '<div class="empty-message">🗳️ Голосований пока нет</div>'; return; }
+        container.innerHTML = '';
+        for (const doc of snapshot.docs) {
+            const data = doc.data();
+            const total = Object.values(data.votes || {}).reduce((a,b)=>a+b,0) || 0;
+            let optionsHtml = '';
+            for (const opt of data.options) {
+                const votes = data.votes?.[opt] || 0;
+                const percent = total > 0 ? (votes / total) * 100 : 0;
+                optionsHtml += `<div class="poll-option"><div>${escapeHtml(opt)}</div><div class="poll-result-bar" style="width: ${percent}%"></div><div style="font-size:12px">${votes} голосов (${percent.toFixed(1)}%)</div></div>`;
+            }
+            const votersList = data.voters ? Object.entries(data.voters).map(([name, choices]) => `${name} (${Array.isArray(choices) ? choices.join(', ') : choices})`).join(', ') : 'никто';
+            container.innerHTML += `<div class="card" style="margin-bottom:15px"><div class="card-header" style="cursor:default; border-bottom:none; padding-bottom:0"><div class="card-title" style="font-size:18px">${escapeHtml(data.question)}</div><div class="badge">${data.type === 'multiple' ? '✅ Несколько ответов' : '🔘 Один ответ'}</div></div>${optionsHtml}<div class="vote-info">✅ Проголосовали: ${votersList}</div>${isAdmin ? `<div style="margin-top:10px"><button class="delete-btn action-btn" onclick="deletePoll('${doc.id}')">🗑️ Удалить</button></div>` : ''}</div>`;
+        }
+    }
+
+    async function loadGroupPolls() {
+        const snapshot = await db.collection('profPolls').orderBy('timestamp', 'desc').get();
+        const container = document.getElementById('groupPollsList');
+        if (!container) return;
+        if (snapshot.empty) { container.innerHTML = '<div class="empty-message">🗳️ Активных голосований нет</div>'; return; }
+        container.innerHTML = '';
+        for (const doc of snapshot.docs) {
+            const data = doc.data();
+            const total = Object.values(data.votes || {}).reduce((a,b)=>a+b,0) || 0;
+            const userVoted = data.voters && data.voters[currentUser];
+            let optionsHtml = '';
+            for (const opt of data.options) {
+                const votes = data.votes?.[opt] || 0;
+                const percent = total > 0 ? (votes / total) * 100 : 0;
+                const isSelected = userVoted && ((data.type === 'multiple' && Array.isArray(userVoted) && userVoted.includes(opt)) || userVoted === opt);
+                optionsHtml += `<div class="poll-option ${userVoted ? 'poll-voted' : ''}" onclick="${!userVoted ? `votePoll('${doc.id}', '${opt}', '${data.type}')` : ''}"><div>${escapeHtml(opt)} ${userVoted && isSelected ? '✓' : ''}</div>${userVoted ? `<div class="poll-result-bar" style="width: ${percent}%"></div><div style="font-size:12px">${votes} голосов (${percent.toFixed(1)}%)</div>` : ''}</div>`;
+            }
+            container.innerHTML += `<div class="card" style="margin-bottom:15px"><div class="card-header" style="cursor:default; border-bottom:none; padding-bottom:0"><div class="card-title" style="font-size:18px">${escapeHtml(data.question)}</div><div class="badge">${data.type === 'multiple' ? '✅ Можно выбрать несколько' : '🔘 Только один ответ'}</div></div>${optionsHtml}${userVoted ? '' : `<div style="margin-top:10px; text-align:center"><button class="admin-btn" onclick="submitVote('${doc.id}')" style="background:var(--primary)">✅ Отправить голос</button></div>`}</div>`;
+        }
+    }
+
+    let currentVoteSelections = {};
+
+    async function votePoll(pollId, option, type) {
+        if (!currentUser) { alert('Только члены профгруппы могут голосовать'); return; }
+        const docRef = db.collection('profPolls').doc(pollId);
+        const doc = await docRef.get();
+        const data = doc.data();
+        if (data.voters && data.voters[currentUser]) { alert('Вы уже проголосовали'); return; }
+        
+        if (type === 'multiple') {
+            if (!currentVoteSelections[pollId]) currentVoteSelections[pollId] = [];
+            if (currentVoteSelections[pollId].includes(option)) {
+                currentVoteSelections[pollId] = currentVoteSelections[pollId].filter(o => o !== option);
+            } else {
+                currentVoteSelections[pollId].push(option);
+            }
+            // Визуально отмечаем выбранные опции
+            document.querySelectorAll(`.poll-option`).forEach(el => {
+                if (el.innerText.includes(option)) {
+                    el.classList.toggle('selected');
+                }
+            });
+        } else {
+            // Одиночный ответ - голосуем сразу
+            const votes = data.votes || {};
+            votes[option] = (votes[option] || 0) + 1;
+            const voters = data.voters || {};
+            voters[currentUser] = option;
+            await docRef.update({ votes, voters });
+            loadGroupPolls();
+            loadPolls();
+        }
+    }
+
+    async function submitVote(pollId) {
+        const selections = currentVoteSelections[pollId];
+        if (!selections || selections.length === 0) { alert('Выберите хотя бы один вариант'); return; }
+        const docRef = db.collection('profPolls').doc(pollId);
+        const doc = await docRef.get();
+        const data = doc.data();
+        const votes = data.votes || {};
+        for (const opt of selections) {
+            votes[opt] = (votes[opt] || 0) + 1;
+        }
+        const voters = data.voters || {};
+        voters[currentUser] = selections;
+        await docRef.update({ votes, voters });
+        delete currentVoteSelections[pollId];
+        loadGroupPolls();
+        loadPolls();
+    }
+
+    async function loadGroupList() {
+        const onlineSnapshot = await db.collection('profGroupOnline').get();
+        const onlineUsers = {};
+        onlineSnapshot.forEach(doc => { onlineUsers[doc.data().user] = doc.data().lastSeen; });
+        
+        const pollsSnapshot = await db.collection('profPolls').get();
+        const votedUsers = {};
+        pollsSnapshot.forEach(doc => {
+            const data = doc.data();
+            if (data.voters) {
+                Object.keys(data.voters).forEach(user => { votedUsers[user] = true; });
+            }
+        });
+        
+        const container = document.getElementById('groupList');
+        container.innerHTML = '';
+        for (const [login, pass] of Object.entries(users)) {
+            const isOnline = onlineUsers[login] && (Date.now() - onlineUsers[login] < 60000);
+            const hasVoted = votedUsers[login];
+            container.innerHTML += `<div class="group-member"><span><b>${login}</b></span><span class="${isOnline ? 'group-online' : 'group-offline'}">${isOnline ? '🟢 Онлайн' : '⚫ Офлайн'}</span><span class="group-voted">${hasVoted ? '✅ Проголосовал' : '⏳ Ещё не голосовал'}</span></div>`;
+        }
+    }
+
+    // Админ-функции (редактирование)
+    let currentEditId = null;
+
+    async function loadExpenses() {
+        const snapshot = await db.collection('profExpenses').orderBy('date', 'desc').get();
+        const tbody = document.querySelector('#expensesTable tbody');
+        if (!tbody) return;
+        tbody.innerHTML = '';
+        snapshot.forEach(doc => {
+            const data = doc.data();
+            tbody.innerHTML += `<tr><td>${data.date}</td><td>${escapeHtml(data.category)}</td><td>${data.amount} ₽</td><td>${escapeHtml(data.comment || '')}</td><td><button class="edit-btn action-btn" onclick="editExpense('${doc.id}')">✏️</button><button class="delete-btn action-btn" onclick="deleteExpense('${doc.id}')">🗑️</button></td></tr>`;
+        });
+    }
+
+    async function loadJubilees() {
+        const snapshot = await db.collection('profJubilees').orderBy('jubileeDate', 'asc').get();
+        const tbody = document.querySelector('#jubileeTable tbody');
+        if (!tbody) return;
+        tbody.innerHTML = '';
+        snapshot.forEach(doc => {
+            const data = doc.data();
+            tbody.innerHTML += `<tr><td>${escapeHtml(data.name)}</td><td>${data.birthDate}</td><td>${data.jubileeDate}</td><td>${escapeHtml(data.congratsType)}</td><td><span class="badge">${data.status || 'Предстоит'}</span></td><td><button class="edit-btn action-btn" onclick="editJubilee('${doc.id}')">✏️</button><button class="delete-btn action-btn" onclick="deleteJubilee('${doc.id}')">🗑️</button></td></tr>`;
+        });
+    }
+
+    async function loadRewards() {
+        const year = document.getElementById('yearFilter')?.value || '2024';
+        const snapshot = await db.collection('profRewards').where('year', '==', year).orderBy('date', 'desc').get();
+        const tbody = document.querySelector('#rewardsTable tbody');
+        if (!tbody) return;
+        tbody.innerHTML = '';
+        snapshot.forEach(doc => {
+            const data = doc.data();
+            tbody.innerHTML += `<tr><td>${escapeHtml(data.name)}</td><td>${escapeHtml(data.type)}</td><td>${data.date}</td><td>${escapeHtml(data.orderNumber || '')}</td><td><button class="edit-btn action-btn" onclick="editReward('${doc.id}')">✏️</button><button class="delete-btn action-btn" onclick="deleteReward('${doc.id}')">🗑️</button></td></tr>`;
+        });
+    }
+
+    // Модальные окна
+    function openNewsModal(editId, title, desc) {
+        currentEditId = editId || null;
+        document.getElementById('modalTitle').innerHTML = editId ? '✏️ Редактировать новость' : '➕ Добавить новость';
+        document.getElementById('modalBody').innerHTML = `<div class="form-group"><label>Заголовок</label><input type="text" id="newsTitle" value="${escapeHtml(title || '')}"></div><div class="form-group"><label>Текст</label><textarea id="newsDesc" rows="4">${escapeHtml(desc || '')}</textarea></div><button class="admin-btn" onclick="saveNews()">Сохранить</button>`;
+        document.getElementById('modal').style.display = 'flex';
+    }
+    async function saveNews() {
+        const title = document.getElementById('newsTitle')?.value;
+        const desc = document.getElementById('newsDesc')?.value;
+        if (!title) return;
+        if (currentEditId) await db.collection('profNews').doc(currentEditId).update({ title, description: desc });
+        else await db.collection('profNews').add({ title, description: desc, timestamp: Date.now() });
+        closeModal(); loadNews();
+    }
+    async function deleteNews(id) { if (confirm('Удалить новость?')) { await db.collection('profNews').doc(id).delete(); loadNews(); } }
+    async function deleteEvent(id) { if (confirm('Удалить мероприятие?')) { await db.collection('profEvents').doc(id).delete(); loadEvents(); } }
+    async function deleteVoucher(id) { if (confirm('Удалить путевку?')) { await db.collection('profVouchers').doc(id).delete(); loadVouchers(); } }
+    async function deletePoll(id) { if (confirm('Удалить голосование?')) { await db.collection('profPolls').doc(id).delete(); loadPolls(); loadGroupPolls(); } }
+    async function deleteExpense(id) { if (confirm('Удалить расход?')) { await db.collection('profExpenses').doc(id).delete(); loadExpenses(); } }
+    async function deleteJubilee(id) { if (confirm('Удалить юбиляра?')) { await db.collection('profJubilees').doc(id).delete(); loadJubilees(); } }
+    async function deleteReward(id) { if (confirm('Удалить поощрение?')) { await db.collection('profRewards').doc(id).delete(); loadRewards(); } }
+
+    function openEventModal() {
+        document.getElementById('modalTitle').innerHTML = '➕ Добавить мероприятие';
+        document.getElementById('modalBody').innerHTML = `<div class="form-group"><label>Название</label><input type="text" id="eventTitle"></div><div class="form-group"><label>Дата</label><input type="date" id="eventDate"></div><div class="form-group"><label>Место</label><input type="text" id="eventPlace"></div><div class="form-group"><label>Описание</label><textarea id="eventDesc" rows="3"></textarea></div><button class="admin-btn" onclick="saveEvent()">Сохранить</button>`;
+        document.getElementById('modal').style.display = 'flex';
+    }
+    async function saveEvent() {
+        const title = document.getElementById('eventTitle')?.value;
+        if (!title) return;
+        await db.collection('profEvents').add({ title, eventDate: document.getElementById('eventDate')?.value, place: document.getElementById('eventPlace')?.value, description: document.getElementById('eventDesc')?.value });
+        closeModal(); loadEvents();
+    }
+
+    function openVoucherModal() {
+        document.getElementById('modalTitle').innerHTML = '➕ Добавить путевку';
+        document.getElementById('modalBody').innerHTML = `<div class="form-group"><label>Название</label><input type="text" id="voucherTitle"></div><div class="form-group"><label>Тип</label><input type="text" id="voucherType" placeholder="Санаторий..."></div><div class="form-group"><label>Место</label><input type="text" id="voucherPlace"></div><div class="form-group"><label>Даты</label><input type="text" id="voucherDates"></div><div class="form-group"><label>Стоимость</label><input type="text" id="voucherPrice"></div><div class="form-group"><label>Описание</label><textarea id="voucherDesc" rows="3"></textarea></div><button class="admin-btn" onclick="saveVoucher()">Сохранить</button>`;
+        document.getElementById('modal').style.display = 'flex';
+    }
+    async function saveVoucher() {
+        const title = document.getElementById('voucherTitle')?.value;
+        if (!title) return;
+        await db.collection('profVouchers').add({ title, voucherType: document.getElementById('voucherType')?.value, place: document.getElementById('voucherPlace')?.value, dates: document.getElementById('voucherDates')?.value, price: document.getElementById('voucherPrice')?.value, description: document.getElementById('voucherDesc')?.value, timestamp: Date.now() });
+        closeModal(); loadVouchers();
+    }
+
+    function openPollModal() {
+        document.getElementById('modalTitle').innerHTML = '🗳️ Создать голосование';
+        document.getElementById('modalBody').innerHTML = `
+            <div class="form-group"><label>Вопрос</label><input type="text" id="pollQuestion"></div>
+            <div class="form-group"><label>Варианты (через запятую)</label><input type="text" id="pollOptions" placeholder="Да, Нет, Воздержусь"></div>
+            <div class="form-group"><label>Тип голосования</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="pollType" value="single" checked> 🔘 Один ответ</label>
+                    <label><input type="radio" name="pollType" value="multiple"> ✅ Несколько ответов</label>
+                </div>
+            </div>
+            <button class="admin-btn" onclick="savePoll()">Создать</button>`;
+        document.getElementById('modal').style.display = 'flex';
+    }
+    async function savePoll() {
+        const question = document.getElementById('pollQuestion')?.value;
+        const optionsStr = document.getElementById('pollOptions')?.value;
+        const type = document.querySelector('input[name="pollType"]:checked')?.value || 'single';
+        if (!question || !optionsStr) return;
+        await db.collection('profPolls').add({ question, options: optionsStr.split(',').map(s=>s.trim()), type, votes: {}, voters: {}, timestamp: Date.now() });
+        closeModal(); loadPolls(); loadGroupPolls();
+    }
+
+    function openExpenseModal(editId, data) {
+        currentEditId = editId || null;
+        document.getElementById('modalTitle').innerHTML = editId ? '✏️ Редактировать расход' : '💰 Добавить расход';
+        document.getElementById('modalBody').innerHTML = `<div class="form-group"><label>Дата</label><input type="date" id="expenseDate" value="${data?.date || ''}"></div><div class="form-group"><label>Статья</label><input type="text" id="expenseCategory" value="${escapeHtml(data?.category || '')}"></div><div class="form-group"><label>Сумма</label><input type="number" id="expenseAmount" value="${data?.amount || ''}"></div><div class="form-group"><label>Комментарий</label><textarea id="expenseComment" rows="2">${escapeHtml(data?.comment || '')}</textarea></div><button class="admin-btn" onclick="saveExpense()">Сохранить</button>`;
+        document.getElementById('modal').style.display = 'flex';
+    }
+    async function saveExpense() {
+        const date = document.getElementById('expenseDate')?.value;
+        const category = document.getElementById('expenseCategory')?.value;
+        const amount = document.getElementById('expenseAmount')?.value;
+        if (!date || !category || !amount) return;
+        if (currentEditId) await db.collection('profExpenses').doc(currentEditId).update({ date, category, amount: parseInt(amount), comment: document.getElementById('expenseComment')?.value });
+        else await db.collection('profExpenses').add({ date, category, amount: parseInt(amount), comment: document.getElementById('expenseComment')?.value });
+        closeModal(); loadExpenses();
+    }
+
+    function openJubileeModal(editId, data) {
+        currentEditId = editId || null;
+        document.getElementById('modalTitle').innerHTML = editId ? '✏️ Редактировать юбиляра' : '🎂 Добавить юбиляра';
+        document.getElementById('modalBody').innerHTML = `<div class="form-group"><label>ФИО</label><input type="text" id="jubileeName" value="${escapeHtml(data?.name || '')}"></div><div class="form-group"><label>Дата рождения</label><input type="date" id="jubileeBirth" value="${data?.birthDate || ''}"></div><div class="form-group"><label>Дата юбилея</label><input type="date" id="jubileeDate" value="${data?.jubileeDate || ''}"></div><div class="form-group"><label>Поздравление</label><select id="jubileeCongrats"><option>Деньги</option><option>Цветы</option><option>Деньги+цветы</option><option>Грамота</option></select></div><div class="form-group"><label>Статус</label><select id="jubileeStatus"><option>Предстоит</option><option>Поздравлен</option></select></div><button class="admin-btn" onclick="saveJubilee()">Сохранить</button>`;
+        document.getElementById('modal').style.display = 'flex';
+        if (data?.congratsType) setTimeout(() => { const el = document.getElementById('jubileeCongrats'); if(el) el.value = data.congratsType; }, 50);
+        if (data?.status) setTimeout(() => { const el = document.getElementById('jubileeStatus'); if(el) el.value = data.status; }, 50);
+    }
+    async function saveJubilee() {
+        const name = document.getElementById('jubileeName')?.value;
+        if (!name) return;
+        if (currentEditId) await db.collection('profJubilees').doc(currentEditId).update({ name, birthDate: document.getElementById('jubileeBirth')?.value, jubileeDate: document.getElementById('jubileeDate')?.value, congratsType: document.getElementById('jubileeCongrats')?.value, status: document.getElementById('jubileeStatus')?.value });
+        else await db.collection('profJubilees').add({ name, birthDate: document.getElementById('jubileeBirth')?.value, jubileeDate: document.getElementById('jubileeDate')?.value, congratsType: document.getElementById('jubileeCongrats')?.value, status: document.getElementById('jubileeStatus')?.value });
+        closeModal(); loadJubilees();
+    }
+
+    function openRewardModal(editId, data) {
+        currentEditId = editId || null;
+        document.getElementById('modalTitle').innerHTML = editId ? '✏️ Редактировать поощрение' : '🏆 Добавить поощрение';
+        document.getElementById('modalBody').innerHTML = `<div class="form-group"><label>Год</label><select id="rewardYear"><option>2020</option><option>2021</option><option>2022</option><option>2023</option><option>2024</option><option>2025</option><option>2026</option><option>2027</option></select></div><div class="form-group"><label>ФИО</label><input type="text" id="rewardName" value="${escapeHtml(data?.name || '')}"></div><div class="form-group"><label>Вид</label><input type="text" id="rewardType" value="${escapeHtml(data?.type || '')}"></div><div class="form-group"><label>Дата</label><input type="date" id="rewardDate" value="${data?.date || ''}"></div><div class="form-group"><label>Приказ</label><input type="text" id="rewardOrder" value="${escapeHtml(data?.orderNumber || '')}"></div><button class="admin-btn" onclick="saveReward()">Сохранить</button>`;
+        document.getElementById('modal').style.display = 'flex';
+        if (data?.year) setTimeout(() => { const el = document.getElementById('rewardYear'); if(el) el.value = data.year; }, 50);
+    }
+    async function saveReward() {
+        const name = document.getElementById('rewardName')?.value;
+        if (!name) return;
+        if (currentEditId) await db.collection('profRewards').doc(currentEditId).update({ year: document.getElementById('rewardYear')?.value, name, type: document.getElementById('rewardType')?.value, date: document.getElementById('rewardDate')?.value, orderNumber: document.getElementById('rewardOrder')?.value });
+        else await db.collection('profRewards').add({ year: document.getElementById('rewardYear')?.value, name, type: document.getElementById('rewardType')?.value, date: document.getElementById('rewardDate')?.value, orderNumber: document.getElementById('rewardOrder')?.value });
+        closeModal(); loadRewards();
+    }
+
+    function closeModal() { document.getElementById('modal').style.display = 'none'; currentEditId = null; }
+    function closeModalOnClick(e) { if (e.target === document.getElementById('modal')) closeModal(); }
+    function escapeHtml(text) { if (!text) return ''; return text.replace(/[&<>]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[m])); }
+
+    // Навигация
+    document.querySelectorAll('.nav-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(`${tab.dataset.page}Page`).classList.add('active');
+        });
+    });
+
+    window.showLoginModal = showLoginModal;
+    window.closeLoginModal = closeLoginModal;
+    window.doLogin = doLogin;
+    window.logout = logout;
+    window.toggleCollapse = toggleCollapse;
+    window.openNewsModal = openNewsModal;
+    window.saveNews = saveNews;
+    window.deleteNews = deleteNews;
+    window.deleteEvent = deleteEvent;
+    window.deleteVoucher = deleteVoucher;
+    window.deletePoll = deletePoll;
+    window.deleteExpense = deleteExpense;
+    window.deleteJubilee = deleteJubilee;
+    window.deleteReward = deleteReward;
+    window.openEventModal = openEventModal;
+    window.saveEvent = saveEvent;
+    window.openVoucherModal = openVoucherModal;
+    window.saveVoucher = saveVoucher;
+    window.openPollModal = openPollModal;
+    window.savePoll = savePoll;
+    window.openExpenseModal = openExpenseModal;
+    window.saveExpense = saveExpense;
+    window.openJubileeModal = openJubileeModal;
+    window.saveJubilee = saveJubilee;
+    window.openRewardModal = openRewardModal;
+    window.saveReward = saveReward;
+    window.votePoll = votePoll;
+    window.submitVote = submitVote;
+    window.closeModal = closeModal;
+    window.closeModalOnClick = closeModalOnClick;
+</script>
+</body>
+</html>
